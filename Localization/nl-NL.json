@@ -1,5 +1,6 @@
 {
     "welcome": {
     	"title": "Het werkt."
+        "subtitle": "Dit is mijn eerste Vapor App."
     }
 }
