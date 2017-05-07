@@ -1,13 +1,14 @@
 import Vapor
 import HTTP
 import Foundation
+import VaporPostgreSQL
 
 final class MemberController {
     
     func addRoutes(drop: Droplet) {
         drop.group("members") { group in
             group.post("create", handler: create)
-            group.get("all", handler: index)
+            group.get(handler: index)
             group.get("show", Member.self, handler: show)
             group.patch("update", Member.self, handler: update)
             group.post("delete", Member.self, handler: delete)
@@ -15,14 +16,25 @@ final class MemberController {
     }
     
     func create(request: Request) throws -> ResponseRepresentable {
-        var member = try request.member()
+        guard let name = request.formData?["name"]?.string else { throw Abort.badRequest }
+        guard let email = request.formData?["email"]?.string else { throw Abort.badRequest }
+        
+        
+        var member = Member(name: name, email: email)
         try member.save()
-        return member
+        return Response(redirect: "/members")
     }
     
     
     func index(request: Request) throws -> ResponseRepresentable {
-        return try JSON(node: Member.all().makeNode())
+        var parameters = [String: Node]()
+        
+        if let db = drop.database?.driver as? PostgreSQLDriver {
+            let query = try db.raw("SELECT * FROM members ORDER BY name ASC")
+            parameters = ["members": query]
+        }
+        
+        return try drop.view.make("manage", parameters)
     }
     
     
@@ -43,7 +55,7 @@ final class MemberController {
     
     func delete(request: Request, member: Member) throws -> ResponseRepresentable {
         try member.delete()
-        return JSON([:])
+        return Response(redirect: "/members")
     }
 }
 
@@ -53,5 +65,18 @@ extension Request {
         guard let json = json else { throw Abort.badRequest }
         
         return try Member(node: json)
+    }
+}
+
+
+extension Date {
+    func stringForDate() -> String {
+        var dateString = ""
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMM d, yyyy 'at' hh:mm"
+        dateString = formatter.string(from: self)
+        
+        return dateString
     }
 }

@@ -8,23 +8,27 @@
     </div>
     <div class="row">
         <div class="u-full-width">
-            <h5>Add new post:</h5>
-            <form action="" method="post" enctype="multipart/form-data">
-                <input type="text" class="u-full-width" name="content" placeholder="Today, I..."/><br>
+            <h5>Add new member:</h5>
+            <form action="/members/create" method="post" enctype="multipart/form-data">
+                <input type="text" class="u-full-width" name="name" placeholder="what is your full name"/><br>
+                <input type="text" class="u-full-width" name="email" placeholder="we need your email as your user login"/><br>
                 <input type="file" name="image"/><br>
                 <input type="submit" value="save"/>
             </form>
         </div>
     </div>
 
-    #loop(posts, "post") {
+    #loop(members, "member") {
         <div class="row">
             <div class="eight columns">
-                <p>Created On</p>
-                <h6>Content</h6>
+                <p>#(member.name)</p>
+                <h6>#(member.email)</h6>
+                #if(false) {
+                    <img class="member-image" src="../../images/uploads/#(member.imageURL)">
+                }
             </div>
             <div class="four columns">
-                <form action="" method="post">
+                <form action="/members/delete/#(member.id)" method="post">
                     <input type="submit" value="Delete"/>
                 </form>
             </div>
