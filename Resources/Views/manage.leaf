@@ -18,21 +18,26 @@
         </div>
     </div>
 
-    #loop(members, "member") {
-        <div class="row">
-            <div class="eight columns">
-                <p>#(member.name)</p>
-                <h6>#(member.email)</h6>
-                #if(false) {
-                    <img class="member-image" src="../../images/uploads/#(member.imageURL)">
-                }
-            </div>
-            <div class="four columns">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email Address</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+        #loop(members, "member") {
+            <tr>
                 <form action="/members/delete/#(member.id)" method="post">
-                    <input type="submit" value="Delete"/>
+                <td>#(member.name)</td>
+                <td><a href="mailto:#(member.name)<#(member.email)>?subject=I need some help with something">#(member.email)</a></td>
+                <td>
+                    <button type="submit" value="Submit">Delete</button>
+                </td>
                 </form>
-            </div>
-        </div>
-        <hr>
-    }
+            </tr>
+        }
+        </tbody>
+    <table>
 }

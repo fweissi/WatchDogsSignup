@@ -30,7 +30,7 @@ final class MemberController {
         var parameters = [String: Node]()
         
         if let db = drop.database?.driver as? PostgreSQLDriver {
-            let query = try db.raw("SELECT * FROM members ORDER BY name ASC")
+            let query = try db.raw("SELECT * FROM members ORDER BY id DESC")
             parameters = ["members": query]
         }
         
