@@ -3,7 +3,10 @@ import VaporPostgreSQL
 
 let drop = Droplet()
 try drop.addProvider(VaporPostgreSQL.Provider)
+drop.preparations += Member.self
 
+let memberController = MemberController()
+memberController.addRoutes(drop: drop)
 
 drop.get { req in
     return try drop.view.make("welcome", [
