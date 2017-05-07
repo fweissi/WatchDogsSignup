@@ -1,0 +1,9 @@
+#extend("base")
+
+#export("body") {
+    <form action="/login" method="POST">
+        <input type="text" name="name" placeholder="username"/>
+        <input type="text" name="password" placeholder="password"/>
+        <input type="submit" value="Login"/>
+    </form>
+}

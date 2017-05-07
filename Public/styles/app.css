@@ -9,8 +9,8 @@ body, html {
 }
 
 body {
-	font-family: sans-serif;
-	color: #333;
+	font-family: 'Open Sans', sans-serif;
+    color: #999;
 	position: relative;
 }
 
@@ -21,45 +21,8 @@ body {
     float: left;
 }
 
-.message {
-	position: absolute;
-	width: 256px;
-    height: 64px;
-	text-align: center;
-	top: 50%;
-	left: 50%;
-	margin-left: -128px;
-    margin-top: -32px;
-    line-height: 0;
-}
-
-.message h1 {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    line-height: 64px;
-    float: left;
-    font-family: 'Quicksand';
-    font-weight: 500;
-    font-size: 36px;
-}
-
-
-.message h2 {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    line-height: 64px;
-    font-family: 'Quicksand';
-    font-weight: 500;
-    font-size: 30px;
-    color: #FFFFFF;
-    background-color: #333333;
-    margin: 20px;
-}
-
-.message img {
-    height: 100%;
-    display: inline-block;
-    float: left;
+.post-image {
+    width: 350px;
+    height: auto;
+    border: 0px;
 }
