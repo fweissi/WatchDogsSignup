@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <table>
+    <table id="members" class="tablesorter">
         <thead>
             <tr>
                 <th>Name</th>
@@ -32,7 +32,7 @@
                 <form action="/members/delete/#(member.id)" method="post">
                 <td>#(member.name)</td>
                 <td><a href="mailto:#(member.name)<#(member.email)>?subject=I need some help with something">#(member.email)</a></td>
-                <td>
+                <td data-order="#(member.id)">
                     <button type="submit" value="Submit">Delete</button>
                 </td>
                 </form>

@@ -330,11 +330,10 @@ table {
 }
 th,
 td {
-  	text-align: left;
+	padding: 6px 12px;
 	border: 1px dotted #E1E1E1;
-	width: auto;
-	padding: 10px 20px;
 	color: #3f0872;
+	vertical-align: middle;
 }
 th {
 	background: #9a13e6;

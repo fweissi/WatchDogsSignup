@@ -26,3 +26,38 @@ body {
     height: auto;
     border: 0px;
 }
+
+
+table#members thead { font-size: .7em; text-transform: uppercase; }
+table#members thead tr { border-bottom: 1px solid rgba(154,154,154,.75); }
+table#members thead th { padding: 8px; color: rgba(0,0,0,.6); padding: 8px; vertical-align: bottom; transition: background-color .5s, color .5s; }
+table#members thead th:hover { color: #FFF; background-color: #fff5e6; }
+table#members thead th:first-child { padding: 10px 20px; }
+
+table#members thead th.sorted {
+	background-color: #fee8cb;
+    border-left: 1px dotted #9a9a9a;
+    border-right: 1px dotted #9a9a9a;
+    color: rgba(0,0,0,.4);
+}
+
+table#members thead th.sorted::after {
+    content:'';
+    display: inline-block;
+    margin-left: 8px;
+    margin-top: -2px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+}
+
+table#members thead th.sorted.asc::after {
+    border-bottom: 8px solid rgba(0,0,0,.4);
+}
+
+table#members thead th.sorted.desc::after {
+    border-top: 8px solid rgba(0,0,0,.4);
+}
+
+table#members thead th.header {
+    cursor: pointer;
+}
