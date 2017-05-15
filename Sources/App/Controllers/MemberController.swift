@@ -9,6 +9,7 @@ final class MemberController {
         drop.group("members") { group in
             group.post("create", handler: create)
             group.get(handler: index)
+            group.get("all", handler: all)
             group.get("show", Member.self, handler: show)
             group.patch("update", Member.self, handler: update)
             group.post("delete", Member.self, handler: delete)
@@ -35,6 +36,11 @@ final class MemberController {
         }
         
         return try drop.view.make("manage", parameters)
+    }
+    
+    
+    func all(request: Request) throws -> ResponseRepresentable {
+        Member.all().makeNode().converted(to: JSON.self)
     }
     
     
