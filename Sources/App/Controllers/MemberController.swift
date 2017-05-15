@@ -40,7 +40,7 @@ final class MemberController {
     
     
     func all(request: Request) throws -> ResponseRepresentable {
-        Member.all().makeNode().converted(to: JSON.self)
+        return try Member.all().makeNode().converted(to: JSON.self)
     }
     
     
