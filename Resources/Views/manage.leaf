@@ -23,7 +23,7 @@
         </div> <!-- form group row -->
         <div class="form-group row">
             <div class="offset-sm-2 col-sm-10">
-                <button type="submit" value="save" "class="btn btn-primary">Sign in</button>
+                <button type="submit" value="save" class="btn btn-primary">Sign in</button>
             </div>
         </div> <!-- form group row -->
         </form>
@@ -44,7 +44,7 @@
                 <td>#(member.name)</td>
                 <td><a href="mailto:#(member.name)<#(member.email)>?subject=I need some help with something">#(member.email)</a></td>
                 <td data-order="#(member.id)">
-                    <button type="submit" value="Submit">Delete</button>
+                    <button type="submit" class="btn btn-primary" value="Submit">Delete</button>
                 </td>
                 </form>
             </tr>
