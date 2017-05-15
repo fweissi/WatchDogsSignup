@@ -1,13 +1,13 @@
 #extend("base")
 
 #export("body") {
-    <div class="row">
-        <div class="u-full-width">
+    <div class="container">
+        <div class="col-lg-6">
             <h3>Admin page</h3>
         </div>
     </div>
     <div class="row">
-        <div class="u-full-width">
+        <div class="col-lg-12">
             <h5>Add new member:</h5>
             <form action="/members/create" method="post" enctype="multipart/form-data">
                 <input type="text" class="u-full-width" name="name" placeholder="what is your full name"/><br>
@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <table id="members" class="tablesorter">
+    <table id="members" class="table table-hover table-responsive tablesorter">
         <thead>
             <tr>
                 <th>Name</th>

@@ -4,15 +4,16 @@ import VaporPostgreSQL
 let drop = Droplet()
 try drop.addProvider(VaporPostgreSQL.Provider)
 drop.preparations += Member.self
+drop.preparations += Post.self
 
 let memberController = MemberController()
 memberController.addRoutes(drop: drop)
 
-drop.get { req in
-    return try drop.view.make("welcome", [
-    	"message": drop.localization[req.lang, "welcome", "title"],
-    	"info": drop.localization[req.lang, "welcome", "subtitle"]
-    ])
+let postController = PostController()
+postController.addRoutes(drop: drop)
+
+drop.get { request in
+    return try drop.view.make("home")
 }
 
 drop.get("version") { request in

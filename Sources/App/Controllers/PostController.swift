@@ -2,6 +2,17 @@ import Vapor
 import HTTP
 
 final class PostController: ResourceRepresentable {
+    
+    func addRoutes(drop: Droplet) {
+        drop.group("posts") { group in
+            group.post("create", handler: create)
+            group.get(handler: index)
+            group.get("show", Post.self, handler: show)
+            group.patch("update", Post.self, handler: update)
+            group.post("delete", Post.self, handler: delete)
+        }
+    }
+    
     func index(request: Request) throws -> ResponseRepresentable {
         return try Post.all().makeNode().converted(to: JSON.self)
     }

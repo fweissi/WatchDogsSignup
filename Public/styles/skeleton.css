@@ -324,7 +324,7 @@ pre > code {
 
 
 /* Tables
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
 table {
 	width: 100%;
 }
@@ -335,10 +335,14 @@ td {
 	color: #3f0872;
 	vertical-align: middle;
 }
+
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
 th {
-	background: #9a13e6;
-	color: #f8f8ee;
+    background: #9a13e6;
+    color: #f8f8ee;
 }
+
 
 
 /* Spacing

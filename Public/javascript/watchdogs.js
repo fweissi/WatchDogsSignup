@@ -9,7 +9,7 @@ $(document).ready(function() {
                   
                   
                   $("table#members").tablesorter({
-                                                 sortList:[[1,0]],
+                                                 sortList:[[2,1]],
                                                  cssAsc: 'sorted asc',
                                                  cssDesc: 'sorted desc',
                                                  headers : { 2 : { sorter : 'getOrderAttr' } }

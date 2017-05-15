@@ -31,7 +31,9 @@ final class Member: Model {
             ])
     }
     
-    
+}
+
+extension Member: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create("members", closure: { member in
             member.id()

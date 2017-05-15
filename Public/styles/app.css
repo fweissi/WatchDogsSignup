@@ -61,3 +61,15 @@ table#members thead th.sorted.desc::after {
 table#members thead th.header {
     cursor: pointer;
 }
+
+
+table#members tbody { font-size: .9em; line-height: 15px; }
+table#members tbody tr { transition: background-color .5s, color .3s; }
+table#members tbody tr:nth-child(even) { background: rgba(86, 92, 239, 0.1); }
+table#members tbody tr:hover { color: #000; background-color: rgba(156, 175, 255, 1); }
+table#members tbody td { padding: 8px; border-top: 1px dotted rgba(154,154,154,.75); border-right: 1px dotted rgba(154, 154, 154, 0.75); }
+table#members tbody td img { width: 75px; float: left; margin: 0 10px 0 0; border: 1px solid #fff; }
+table#members tbody td span { display: none; }
+table#members tbody td:first-child { font-weight: 700; }
+table#members tbody td:last-child { text-align: left; }
+table#members tbody td::after { content:''; display: block; clear: both; }
