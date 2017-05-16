@@ -9,7 +9,6 @@ final class MemberController {
         drop.group("members") { group in
             group.post("create", handler: create)
             group.get(handler: index)
-            group.get("all", handler: all)
             group.get("show", Member.self, handler: show)
             group.patch("update", Member.self, handler: update)
             group.post("delete", Member.self, handler: delete)
@@ -28,18 +27,6 @@ final class MemberController {
     
     
     func index(request: Request) throws -> ResponseRepresentable {
-        var parameters = [String: Node]()
-        
-        if let db = drop.database?.driver as? PostgreSQLDriver {
-            let query = try db.raw("SELECT * FROM members ORDER BY id DESC")
-            parameters = ["members": query]
-        }
-        
-        return try drop.view.make("manage", parameters)
-    }
-    
-    
-    func all(request: Request) throws -> ResponseRepresentable {
         return try Member.all().makeNode().converted(to: JSON.self)
     }
     

@@ -26,6 +26,9 @@ drop.get("version") { request in
     }
 }
 
+let memberMiddleware = MemberMiddleware(drop: drop)
+drop.middleware.append(memberMiddleware)
+
 drop.resource("posts", PostController())
 
 drop.run()

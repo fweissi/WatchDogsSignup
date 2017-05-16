@@ -1,5 +1,6 @@
 import Vapor
 import Fluent
+import HTTP
 
 final class Member: Model {
 
@@ -32,6 +33,7 @@ final class Member: Model {
     }
     
 }
+
 
 extension Member: Preparation {
     static func prepare(_ database: Database) throws {
