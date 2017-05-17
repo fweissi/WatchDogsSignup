@@ -16,13 +16,29 @@ final class MemberController {
     }
     
     func create(request: Request) throws -> ResponseRepresentable {
-        guard let name = request.formData?["name"]?.string else { throw Abort.badRequest }
-        guard let email = request.formData?["email"]?.string else { throw Abort.badRequest }
+        var name: String? = .none
+        var email: String? = .none
         
+        if let formData = request.formData {
+            guard let aName = formData["name"]?.string else { throw Abort.badRequest }
+            guard let anEmail = formData["email"]?.string else { throw Abort.badRequest }
+            
+            name = aName
+            email = anEmail
+        }
+        else if let json = request.json {
+            guard let aName = json["name"]?.string else { throw Abort.badRequest }
+            guard let anEmail = json["email"]?.string else { throw Abort.badRequest }
+            
+            name = aName
+            email = anEmail
+        }
         
-        var member = Member(name: name, email: email)
+        guard name != .none && email != .none else { throw Abort.badRequest }
+        
+        var member = Member(name: name!, email: email!)
         try member.save()
-        return Response(redirect: "/members")
+        return member
     }
     
     
@@ -48,7 +64,7 @@ final class MemberController {
     
     func delete(request: Request, member: Member) throws -> ResponseRepresentable {
         try member.delete()
-        return Response(redirect: "/members")
+        return JSON([:])
     }
 }
 
