@@ -38,6 +38,9 @@
                         <a class="nav-link" href="/members">Members</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/teachers">Teachers</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link disabled" href="/posts">Disabled</a>
                     </li>
                 </ul>

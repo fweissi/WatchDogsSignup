@@ -1,0 +1,15 @@
+
+<div class="form-group row">
+<label for="inputGrade" class="col-sm-2 col-form-label">Grade</label>
+<div class="col-sm-10">
+<select class="form-control" id="inputGrade" name="grade">
+<option value="K">Kindergarten</option>
+<option value="1">1st Grade</option>
+<option value="2">2nd Grade</option>
+<option value="3">3rd Grade</option>
+<option value="4">4th Grade</option>
+<option value="5">5th Grade</option>
+<option value="6">6th Grade</option>
+</select>
+</div>
+</div> <!-- form group row -->

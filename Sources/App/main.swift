@@ -4,10 +4,14 @@ import VaporPostgreSQL
 let drop = Droplet()
 try drop.addProvider(VaporPostgreSQL.Provider)
 drop.preparations += Member.self
+drop.preparations += Teacher.self
 drop.preparations += Post.self
 
 let memberController = MemberController()
 memberController.addRoutes(drop: drop)
+
+let teacherController = TeacherController()
+teacherController.addRoutes(drop: drop)
 
 let postController = PostController()
 postController.addRoutes(drop: drop)

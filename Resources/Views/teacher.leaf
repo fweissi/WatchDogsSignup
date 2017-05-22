@@ -1,0 +1,65 @@
+#extend("base")
+
+#export("body") {
+	<div class="row">
+		<div class="col-sm-12">
+			<h2>Teacher page</h2>
+		</div> <!-- col-sm-12 -->
+		<div class="col-sm-2">
+            #raw() {
+                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">Add Teacher</button>
+            }
+		</div> <!-- col-sm-12 -->
+	</div> <!-- container -->
+	
+		<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+		    	<div class="modal-content">
+		      		 <div class="modal-header">
+		      		 	<h5 class="modal-title" id="exampleModalLongTitle">Edit Teacher</h5>
+		      		 	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		      		 	</div> <!-- Modal Header -->
+		      		 	<div class="modal-body">
+		      		 	#embed("teacherForm") <!-- Body -->
+		      		 </div> <!-- Modal Body -->
+		      		 <div class="modal-footer">
+		      		 		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		      		 		<button type="submit" class="btn btn-primary" form="updateTeacher" value="save">Save Changes</button>
+		      		 </div> <!-- Modal Footer -->  
+		  		</div> <!-- Modal Content -->
+			</div> <!-- Modal Dialog -->
+		</div> <!-- Modal -->
+		
+	#if(hasTeacher) {
+        #raw() {
+			<script type="text/javascript">$('#exampleModalLong').modal('toggle')</script>
+        }
+	}
+	
+	<table id="teachers" class="table table-hover tablesorter">
+	<thead>
+	<tr>
+	<th>Name</th>
+	<th>Grade</th>
+	<th>Code</th>
+	<th> </th>
+	</tr>
+	</thead>
+	<tbody>
+	
+	#loop(teachers, "teacher") {
+		<tr>
+		<form action="/teachers/delete/#(teacher.id)" method="post">
+		<td>#(teacher.name)</td>
+		<td>#(teacher.grade)</td>
+		<td>#(teacher.code)</td>
+		<td data-order="#(teacher.id)">
+		<button type="submit" class="btn btn-primary" value="Submit">Delete</button>
+		</td>
+		</form>
+		</tr>
+	}
+	
+	</tbody>
+	<table>
+}

@@ -14,4 +14,16 @@ $(document).ready(function() {
                                                  cssDesc: 'sorted desc',
                                                  headers : { 2 : { sorter : 'getOrderAttr' } }
                                                  });
-                  })
+                                                 
+                  $("table#teachers").tablesorter({
+                                                 sortList:[[3,0]],
+                                                 cssAsc: 'sorted asc',
+                                                 cssDesc: 'sorted desc',
+                                                 headers : { 3 : { sorter : 'getOrderAttr' } }
+                                                 });
+                  $( "tr" ).click(function() {
+                  		var action = $(this).children().first().attr('action');
+                  		action = action.replace("delete", "show");
+                  		window.location.href = action;
+					});
+                  });

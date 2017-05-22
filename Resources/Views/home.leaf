@@ -1,13 +1,79 @@
 #extend("base")
 
 #export("body") {
-    #raw() {
+
     <div class="jumbotron">
         <h1>Jumbotron heading</h1>
         <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
         <p><a class="btn btn-lg btn-success" href="/members" role="button">Sign up today</a></p>
     </div>
 
+	<div class="container">
+		<form>
+		  <div class="form-group">
+		    <label for="exampleInputEmail1">Email address</label>
+		    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+		    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">Password</label>
+		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+		  </div>
+
+#embed("grade")
+
+		  <div class="form-group">
+		    <label for="teacher">Teacher</label>
+		    <select class="form-control" id="teacher">
+		      <option value="G">Gershon</option>
+		      <option value="P">Parra</option>
+		      <option value="S">Seely</option>
+		      <option value="B">Berndt</option>
+		      <option value="L">Lovell</option>
+		      <option value="N">Neptune</option>
+		      <option value="C">Carpenter</option>
+		    </select>
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleTextarea">Example textarea</label>
+		    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputFile">File input</label>
+		    <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+		    <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+		  </div>
+		  <fieldset class="form-group">
+		    <legend>Radio buttons</legend>
+		    <div class="form-check">
+		      <label class="form-check-label">
+		        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+		        Option one is this and that&mdash;be sure to include why it's great
+		      </label>
+		    </div>
+		    <div class="form-check">
+		    <label class="form-check-label">
+		        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+		        Option two can be something else and selecting it will deselect option one
+		      </label>
+		    </div>
+		    <div class="form-check disabled">
+		    <label class="form-check-label">
+		        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+		        Option three is disabled
+		      </label>
+		    </div>
+		  </fieldset>
+		  <div class="form-check">
+		    <label class="form-check-label">
+		      <input type="checkbox" class="form-check-input">
+		      Check me out
+		    </label>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+	
     <div class="row marketing">
         <div class="col-lg-6">
             <h4>Subheading</h4>
@@ -31,5 +97,5 @@
             <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
         </div>
     </div>
-    }
+
 }
