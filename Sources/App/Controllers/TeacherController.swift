@@ -42,7 +42,7 @@ final class TeacherController {
         
         guard name != .none && grade != .none && code != .none else { throw Abort.badRequest }
         
-        var teacher = Teacher(name: name!, grade: grade!, code: code!)
+        var teacher = Teacher(name: name!, grade: grade!, code: code!.uppercased())
         try teacher.save()
         return try Teacher.all().makeNode().converted(to: JSON.self)
     }
@@ -88,7 +88,7 @@ final class TeacherController {
         var aTeacher = teacher
         aTeacher.name = name!
         aTeacher.grade = grade!
-        aTeacher.code = code!
+        aTeacher.code = code!.uppercased()
         
         try aTeacher.save()
         return try Teacher.all().makeNode().converted(to: JSON.self)

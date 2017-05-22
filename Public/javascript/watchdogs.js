@@ -27,3 +27,8 @@ $(document).ready(function() {
                   		window.location.href = action;
 					});
                   });
+                  
+                  
+function RedirectTeachers() {
+   window.location="/teachers";
+}

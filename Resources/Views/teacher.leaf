@@ -23,7 +23,7 @@
 		      		 	#embed("teacherForm") <!-- Body -->
 		      		 </div> <!-- Modal Body -->
 		      		 <div class="modal-footer">
-		      		 		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='RedirectTeachers();'">Close</button>
 		      		 		<button type="submit" class="btn btn-primary" form="updateTeacher" value="save">Save Changes</button>
 		      		 </div> <!-- Modal Footer -->  
 		  		</div> <!-- Modal Content -->
@@ -31,9 +31,8 @@
 		</div> <!-- Modal -->
 		
 	#if(hasTeacher) {
-        #raw() {
-			<script type="text/javascript">$('#exampleModalLong').modal('toggle')</script>
-        }
+		<script type="text/javascript">$('#raw() {#exampleModalLong}').modal('toggle');</script>
+		<script type="text/javascript">$("#raw() {#inputGrade} option[value='#(teacher.grade)']").attr("selected","selected");</script>
 	}
 	
 	<table id="teachers" class="table table-hover tablesorter">
