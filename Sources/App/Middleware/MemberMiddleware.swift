@@ -34,7 +34,7 @@ final class MemberMiddleware: Middleware {
                                     do {
                                         let parameters = try JSON(bytes: bodyBytes)
                                         let myResponse = try drop.view.make("manage", ["members": parameters]).makeResponse()
-                                        response = myResponse
+                                        return myResponse
                                     }
                                     catch {
                                         print("Error")
