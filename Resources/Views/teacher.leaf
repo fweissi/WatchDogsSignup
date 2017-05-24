@@ -31,8 +31,7 @@
 		</div> <!-- Modal -->
 		
 	#if(hasTeacher) {
-		<script type="text/javascript">$('#raw() {#exampleModalLong}').modal('toggle');</script>
-		<script type="text/javascript">$("#raw() {#inputGrade} option[value='#(teacher.grade)']").attr("selected","selected");</script>
+		<script type="text/javascript">$('#()exampleModalLong').modal('toggle');</script>
 	}
 	
 	<table id="teachers" class="table table-hover tablesorter">

@@ -27,8 +27,12 @@ final class MemberMiddleware: Middleware {
                         var response = try next.respond(to: request)
                         
                         if url!.absoluteString.contains("members") {
+                            let components = url!.path.components(separatedBy: "/")
+                            let count = components.count
+                            let lastComponent = components[count - 2]
+                            
                             switch lastComponent {
-                            case "members":
+                            case "", "members":
                                 if let drop = drop,
                                     let bodyBytes = response.body.bytes {
                                     do {

@@ -36,9 +36,10 @@ final class MemberController {
         
         guard name != .none && email != .none else { throw Abort.badRequest }
         
-        var member = Member(name: name!, email: email!)
+        let validEmail: Valid<Email> = try email!.validated()
+        var member = Member(name: name!, email: validEmail.value)
         try member.save()
-        return member
+        return try Member.all().makeNode().converted(to: JSON.self)
     }
     
     
@@ -55,8 +56,11 @@ final class MemberController {
     func update(request: Request, member: Member) throws -> ResponseRepresentable {
         let new = try request.member()
         var member = member
+        
+        let validEmail: Valid<Email> = try new.email.validated()
+        
         member.name = new.name
-        member.email = new.email
+        member.email = validEmail.value
         try member.save()
         return member
     }

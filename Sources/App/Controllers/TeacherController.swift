@@ -19,30 +19,26 @@ final class TeacherController {
     func create(request: Request) throws -> ResponseRepresentable {
         var name: String? = .none
         var grade: String? = .none
-        var code: String? = .none
         
         if let formData = request.formData {
             guard let aName = formData["name"]?.string else { throw Abort.badRequest }
             guard let aGrade = formData["grade"]?.string else { throw Abort.badRequest }
-            guard let aCode = formData["code"]?.string else { throw Abort.badRequest }
-            
             name = aName
             grade = aGrade
-            code = aCode
         }
         else if let json = request.json {
             guard let aName = json["name"]?.string else { throw Abort.badRequest }
             guard let aGrade = json["grade"]?.string else { throw Abort.badRequest }
-            guard let aCode = json["code"]?.string else { throw Abort.badRequest }
-            
             name = aName
             grade = aGrade
-            code = aCode
         }
         
-        guard name != .none && grade != .none && code != .none else { throw Abort.badRequest }
+        guard name != .none && grade != .none else { throw Abort.badRequest }
         
-        var teacher = Teacher(name: name!, grade: grade!, code: code!.uppercased())
+        let code = String.makeCode(grade: grade!, name: name!)
+        let validCode: Valid<Code> = try code.validated()
+        
+        var teacher = Teacher(name: name!, grade: grade!, code: validCode.value)
         try teacher.save()
         return try Teacher.all().makeNode().converted(to: JSON.self)
     }
@@ -63,6 +59,9 @@ final class TeacherController {
         var teacher = teacher
         teacher.name = new.name
         teacher.grade = new.grade
+        let code = String.makeCode(grade: new.grade, name: new.name)
+        let validCode: Valid<Code> = try code.validated()
+        teacher.code = validCode.value
         try teacher.save()
         return teacher
     }
@@ -71,24 +70,23 @@ final class TeacherController {
     func updateWithForm(request: Request, teacher: Teacher) throws -> ResponseRepresentable {
         var name: String? = .none
         var grade: String? = .none
-        var code: String? = .none
         
         if let queryData = request.query {
             guard let aName = queryData["name"]?.string else { throw Abort.badRequest }
             guard let aGrade = queryData["grade"]?.string else { throw Abort.badRequest }
-            guard let aCode = queryData["code"]?.string else { throw Abort.badRequest }
             
             name = aName
             grade = aGrade
-            code = aCode
         }
         
-        guard name != .none && grade != .none && code != .none else { throw Abort.badRequest }
+        guard name != .none && grade != .none else { throw Abort.badRequest }
         
         var aTeacher = teacher
         aTeacher.name = name!
         aTeacher.grade = grade!
-        aTeacher.code = code!.uppercased()
+        let code = String.makeCode(grade: grade!, name: name!)
+        let validCode: Valid<Code> = try code.validated()
+        aTeacher.code = validCode.value
         
         try aTeacher.save()
         return try Teacher.all().makeNode().converted(to: JSON.self)
@@ -109,3 +107,28 @@ extension Request {
         return try Teacher(node: json)
     }
 }
+
+
+extension String {
+    static func makeCode(grade: String, name: String) -> String {
+        let nameChar = name.characters
+        var code = "Invalid"
+        if let firstInitial = nameChar.first?.description {
+            code = grade + firstInitial
+        }
+        return code.uppercased()
+    }
+}
+
+
+class Code: ValidationSuite {
+    static func validate(input value: String) throws {
+        let range = value.range(of: "^(?=.*[0-9])(?=.*[A-Z])", options: .regularExpression)
+        guard let _ = range else {
+            throw error(with: value)
+        }
+    }
+}
+
+
+

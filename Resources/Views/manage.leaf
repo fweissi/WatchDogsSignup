@@ -29,7 +29,7 @@
         </form>
     </div> <!-- container -->
 
-    <table id="members" class="table table-hover table-responsive tablesorter">
+    <table id="members" class="table table-hover tablesorter">
         <thead>
             <tr>
                 <th>Name</th>
