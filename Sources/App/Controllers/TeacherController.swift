@@ -35,7 +35,7 @@ final class TeacherController {
         
         guard name != .none && grade != .none else { throw Abort.badRequest }
         
-        let code = String.makeCode(grade: grade!, name: name!)
+        let code = try makeCodeUnique(grade: grade!, name: name!)
         let validCode: Valid<Code> = try code.validated()
         
         var teacher = Teacher(name: name!, grade: grade!, code: validCode.value)
@@ -43,6 +43,28 @@ final class TeacherController {
         return try Teacher.all().makeNode().converted(to: JSON.self)
     }
     
+    private func makeCodeUnique(grade: String, name: String) throws -> String {
+        var code = String.makeCode(grade: grade, name: name)
+        
+        let codesQuery = try Teacher.query().filter("code", .contains, code).all()
+        let count = codesQuery.count
+        if count > 0 {
+            code.uniqueCode(name: name, idx: 0)
+            for var teacher in codesQuery {
+                if teacher.code.lengthOfBytes(using: .utf8) == 2 {
+                    teacher.code.uniqueCode(name: teacher.name, idx: 0)
+                    try teacher.save()
+                }
+                if teacher.code == code {
+                    code.uniqueCode(name: name, idx: 1)
+                }
+            }
+        }
+        
+        let validCode: Valid<Code> = try code.validated()
+        code = validCode.value
+        return code
+    }
     
     func index(request: Request) throws -> ResponseRepresentable {
         return try Teacher.all().makeNode().converted(to: JSON.self)
@@ -60,8 +82,7 @@ final class TeacherController {
         teacher.name = new.name
         teacher.grade = new.grade
         let code = String.makeCode(grade: new.grade, name: new.name)
-        let validCode: Valid<Code> = try code.validated()
-        teacher.code = validCode.value
+        teacher.code = code
         try teacher.save()
         return teacher
     }
@@ -84,9 +105,8 @@ final class TeacherController {
         var aTeacher = teacher
         aTeacher.name = name!
         aTeacher.grade = grade!
-        let code = String.makeCode(grade: grade!, name: name!)
-        let validCode: Valid<Code> = try code.validated()
-        aTeacher.code = validCode.value
+        let code = try makeCodeUnique(grade: grade!, name: name!)
+        aTeacher.code = code
         
         try aTeacher.save()
         return try Teacher.all().makeNode().converted(to: JSON.self)
@@ -117,6 +137,20 @@ extension String {
             code = grade + firstInitial
         }
         return code.uppercased()
+    }
+    
+    
+    mutating func uniqueCode(name: String, idx: Int) {
+        if self.characters.count > 2 {
+            self = String(self.characters.prefix(2))
+        }
+        var code = "Invalid"
+        let count = name.characters.count
+        if idx < count {
+            let nextInitial = name[name.index(startIndex, offsetBy: idx + 1)].description
+            code = self + nextInitial
+        }
+        self = code.uppercased()
     }
 }
 
