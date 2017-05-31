@@ -37,7 +37,7 @@ final class MemberMiddleware: Middleware {
                                     let bodyBytes = response.body.bytes {
                                     do {
                                         let parameters = try JSON(bytes: bodyBytes)
-                                        let myResponse = try drop.view.make("manage", ["members": parameters]).makeResponse()
+                                        let myResponse = try drop.view.make("manage", ["page": "member", "members": parameters]).makeResponse()
                                         return myResponse
                                     }
                                     catch {
@@ -59,7 +59,7 @@ final class MemberMiddleware: Middleware {
                                     let bodyBytes = response.body.bytes {
                                     do {
                                         let parameters = try JSON(bytes: bodyBytes)
-                                        let myResponse = try drop.view.make("teacher", ["hasTeacher": false, "teachers": parameters, "teacher": "{}"]).makeResponse()
+                                        let myResponse = try drop.view.make("teacher", ["page": "teacher", "teachers": parameters]).makeResponse()
                                         return myResponse
                                     }
                                     catch {
@@ -75,7 +75,7 @@ final class MemberMiddleware: Middleware {
                                     do {
                                         let parameter = try JSON(bytes: bodyBytes)
                                         let parameters = try Teacher.all().makeJSON()
-                                        let myResponse = try drop.view.make("teacher", ["hasTeacher": true, "teachers": parameters, "teacher": parameter]).makeResponse()
+                                        let myResponse = try drop.view.make("teacher", ["page": "teacher", "teachers": parameters, "teacher": parameter]).makeResponse()
                                         return myResponse
                                     }
                                     catch {

@@ -13,6 +13,8 @@ final class TeacherController {
             group.patch("update", Teacher.self, handler: update)
             group.get("update", Teacher.self, handler: updateWithForm)
             group.post("delete", Teacher.self, handler: delete)
+            
+            group.get("forgrade", String.self, handler: findByGrade)
         }
     }
     
@@ -116,6 +118,16 @@ final class TeacherController {
     func delete(request: Request, teacher: Teacher) throws -> ResponseRepresentable {
         try teacher.delete()
         return JSON([:])
+    }
+    
+    
+    func findByGrade(request: Request, grade: String) throws -> ResponseRepresentable {
+        let teachers = try Teacher.query().filter("grade", .equals, grade).all()
+        var dictionary = [String: String]()
+        for teacher in teachers {
+            dictionary[teacher.name] = String(describing: teacher.id)
+        }
+        return try dictionary.converted(to: JSON.self)
     }
 }
 

@@ -1,5 +1,5 @@
 <div class="container">
-    #if(hasTeacher) {
+    #if(teacher) {
         <form action="/teachers/update/#(teacher.id)" method="get" enctype="multipart/form-data" id="updateTeacher">
     }
     ##else() {

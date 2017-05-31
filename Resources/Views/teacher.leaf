@@ -30,7 +30,7 @@
 			</div> <!-- Modal Dialog -->
 		</div> <!-- Modal -->
 		
-	#if(hasTeacher) {
+	#if(teacher) {
 		<script type="text/javascript">$('#()exampleModalLong').modal('toggle');</script>
 	}
 	

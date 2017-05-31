@@ -26,6 +26,28 @@ $(document).ready(function() {
                   		action = action.replace("delete", "show");
                   		window.location.href = action;
 					});
+                  
+                  $("#inputGrade").change(function() {
+                                               var grade = $("#inputGrade option:selected").val()
+                                               jQuery.ajax({
+                                                           url: "/teachers/forgrade/"+grade,
+                                                           type: "GET",
+                                                           })
+                                               .done(function(data, textStatus, jqXHR) {
+                                                     var $el = $("#inputTeacher");
+                                                     $el.empty(); // remove old options
+                                                     $.each(data, function(key,value) {
+                                                            $el.append($("<option></option>")
+                                                                       .attr("value", value).text(key));
+                                                            });
+                                                     })
+                                               .fail(function(jqXHR, textStatus, errorThrown) {
+                                                     console.log("HTTP Request Failed");
+                                                     })
+                                               .always(function() {
+                                                       /* ... */
+                                                       });
+                                               });
                   });
                   
                   

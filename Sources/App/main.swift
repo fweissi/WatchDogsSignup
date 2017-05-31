@@ -17,7 +17,7 @@ let postController = PostController()
 postController.addRoutes(drop: drop)
 
 drop.get { request in
-    return try drop.view.make("home")
+    return try drop.view.make("home", ["page": "home"])
 }
 
 drop.get("version") { request in
